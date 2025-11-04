@@ -1,4 +1,6 @@
-const router = express.Router();
+import { Router } from "express";
+
+const router = Router();
 
 const doctors = [
   { id: 1, name: "Dr. Sarah Lee", specialty: "Cardiology" },
@@ -6,10 +8,10 @@ const doctors = [
 ];
 
 // GET all doctors
-router.get("/", (req, res) => res.status(200).json(doctors));
+router.get("/api/doctors", (req, res) => res.status(200).json(doctors));
 
 // GET doctor by ID
-router.get("/:id", (req, res) => {
+router.get("/api/doctors/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const doctor = doctors.find(doc => doc.id === id);
   
@@ -21,7 +23,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST a new doctor
-router.post("/", (req, res) => {
+router.post("/api/doctors", (req, res) => {
   const { name, specialty } = req.body;
   if (!name || !specialty) {
     return res.status(400).json({ error: "Missing required fields" });
